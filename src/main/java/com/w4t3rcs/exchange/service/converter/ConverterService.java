@@ -4,7 +4,7 @@ import com.w4t3rcs.exchange.dto.conversion.ConversionRequest;
 import com.w4t3rcs.exchange.dto.conversion.ConversionResponse;
 import com.w4t3rcs.exchange.dto.provider.ExchangeProvider;
 import com.w4t3rcs.exchange.dto.random.RandomizedPair;
-import com.w4t3rcs.exchange.service.strategy.WebParser;
+import com.w4t3rcs.exchange.service.parser.WebParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
