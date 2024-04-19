@@ -16,3 +16,12 @@
 <br>
 <h3>Cache</h3>
 <h5>Cache is implemented by Spring Data Redis (Containing Lettuce)</h5>
+<br>
+<h3>Exceptions</h3>
+<h5>ProviderException is an exception that throws on condition if every provider can't be loaded or is inactive</h5>
+<br>
+<h3>Data Transfer Objects</h3>
+<h5>RandomizedPair is introduced as a pair of objects that are defined randomly inside this object</h5>
+<h5>ExchangeProvider is an enum for containing providers with unformatted uri</h5>
+<h5>ProviderResponse is used in ProviderWebParser for communication with APIs</h5>
+<h5>ConversionRequest and ConversionResponse are created for better readability of REST API communication</h5>
