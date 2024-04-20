@@ -27,7 +27,7 @@ public class ConverterTest {
         Mono<Float> responseMono = converter.convert(request)
                 .map(ConversionResponse::getConverted);
         StepVerifier.create(responseMono)
-                .expectNextMatches(conversionResponse -> conversionResponse == 3.75f || conversionResponse == 4.0f)
+                .expectNextMatches(conversionResponse -> conversionResponse == 3.75f)
                 .verifyComplete();
     }
 }
