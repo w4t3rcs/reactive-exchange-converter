@@ -25,7 +25,7 @@ public class FormatterTest {
         ConversionRequest request = new ConversionRequest("EUR", "USD", 3.1f);
         Assertions.assertEquals("https://api.exchangerate-api.com/v4/latest/EUR",
                 formatter.format(ExchangeProvider.PROVIDER_1, request));
-        Assertions.assertEquals("http://api.exchangeratesapi.io/v1/latest?access_key=9abbf9404bc492d41dc78c2abdb410d3",
+        Assertions.assertEquals("http://api.exchangeratesapi.io/v1/latest?access_key=9abbf9404bc492d41dc78c2abdb410d3&base=EUR",
                 formatter.format(ExchangeProvider.PROVIDER_2, request));
     }
 }
