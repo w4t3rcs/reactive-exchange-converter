@@ -29,11 +29,15 @@ public class ConverterService implements Converter<ConversionRequest, Mono<Conve
         );
 
         if (pathPair.getFirst() == ExchangeProvider.PROVIDER_1) {
-            return webParser.respond(request, ExchangeProvider.PROVIDER_1)
-                    .switchIfEmpty(webParser.respond(request, ExchangeProvider.PROVIDER_2));
+            return convert(request, ExchangeProvider.PROVIDER_1, ExchangeProvider.PROVIDER_2);
         } else {
-            return webParser.respond(request, ExchangeProvider.PROVIDER_2)
-                    .switchIfEmpty(webParser.respond(request, ExchangeProvider.PROVIDER_1));
+            return convert(request, ExchangeProvider.PROVIDER_2, ExchangeProvider.PROVIDER_1);
         }
+    }
+
+    private Mono<ConversionResponse> convert(ConversionRequest request, ExchangeProvider defaultProvider, ExchangeProvider alternate) {
+        return webParser.respond(request, defaultProvider)
+                .onErrorComplete()
+                .switchIfEmpty(webParser.respond(request, alternate));
     }
 }
