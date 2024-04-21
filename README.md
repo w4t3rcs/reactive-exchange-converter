@@ -10,9 +10,9 @@
 <code>"{"from": "EUR","to": "USD","amount": 23.0,"converted": 24.53}"</code>
 <br><br>
 <h3>Services</h3>
-<h5>ProviderWebParser is for getting data from other APIs using WebClient and parsing to Mono of ProviderResponse</h5>
+<h5>ProviderConverter is for getting data from other APIs using WebClient and parsing to Mono of ProviderResponse</h5>
 <h5>ProviderEndpointFormatter is for getting needed uri for API from ConversionRequest</h5>
-<h5>ConverterService is for getting random provider and executing parsing (ProvideWebParser). Also it is the only one Service that is declared in ConversionController</h5>
+<h5>ConversionHandlerService is for getting random provider and handling the conversion using (ProviderConverter). Also it is the only one Service that is declared in ConversionController</h5>
 <br>
 <h3>Cache</h3>
 <h5>Cache is implemented by Spring Data Redis (Containing Lettuce)</h5>
