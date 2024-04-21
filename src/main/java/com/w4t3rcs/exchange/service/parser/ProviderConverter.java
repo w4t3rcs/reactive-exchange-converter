@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class ProviderWebParser implements WebParser<ConversionRequest, Mono<ConversionResponse>> {
+public class ProviderConverter implements Converter<ConversionRequest, Mono<ConversionResponse>> {
     private final WebClient webClient;
     private final EndpointFormatter<ExchangeProvider, String, ConversionRequest> formatter;
 

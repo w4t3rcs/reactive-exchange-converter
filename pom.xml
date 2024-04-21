@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.w4t3rcs</groupId>
-    <artifactId>reactive-exchange-converter</artifactId>
+    <artifactId>reactive-exchange-conversionHandler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>reactive-exchange-converter</name>
-    <description>reactive-exchange-converter</description>
+    <name>reactive-exchange-conversionHandler</name>
+    <description>reactive-exchange-conversionHandler</description>
     <properties>
         <java.version>17</java.version>
     </properties>

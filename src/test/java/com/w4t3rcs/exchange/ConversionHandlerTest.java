@@ -2,9 +2,8 @@ package com.w4t3rcs.exchange;
 
 import com.w4t3rcs.exchange.dto.conversion.ConversionRequest;
 import com.w4t3rcs.exchange.dto.conversion.ConversionResponse;
-import com.w4t3rcs.exchange.dto.provider.ExchangeProvider;
-import com.w4t3rcs.exchange.service.parser.WebParser;
-import org.junit.jupiter.api.Test;
+import com.w4t3rcs.exchange.service.handler.ConversionHandler;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,20 +13,21 @@ import reactor.test.StepVerifier;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class ParserTest {
-    private final WebParser<ConversionRequest, Mono<ConversionResponse>> parser;
+public class ConversionHandlerTest {
+    private final ConversionHandler<ConversionRequest, Mono<ConversionResponse>> conversionHandler;
 
     @Autowired
-    public ParserTest(WebParser<ConversionRequest, Mono<ConversionResponse>> parser) {
-        this.parser = parser;
+    public ConversionHandlerTest(ConversionHandler<ConversionRequest, Mono<ConversionResponse>> conversionHandler) {
+        this.conversionHandler = conversionHandler;
     }
 
-    @Test
-    void parse() {
+    @RepeatedTest(5)
+    void convert() {
         ConversionRequest request = new ConversionRequest("USD", "EUR", 4f);
-        Mono<ConversionResponse> responseMono = parser.respond(request, ExchangeProvider.PROVIDER_1);
+        Mono<Float> responseMono = conversionHandler.convert(request)
+                .map(ConversionResponse::getConverted);
         StepVerifier.create(responseMono)
-                .expectNext(new ConversionResponse("USD", "EUR", 4f, 3.75f))
+                .expectNextMatches(conversionResponse -> conversionResponse == 3.75f)
                 .verifyComplete();
     }
 }

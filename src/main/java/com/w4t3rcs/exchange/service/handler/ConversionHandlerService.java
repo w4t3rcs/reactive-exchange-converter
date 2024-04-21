@@ -1,10 +1,10 @@
-package com.w4t3rcs.exchange.service.converter;
+package com.w4t3rcs.exchange.service.handler;
 
 import com.w4t3rcs.exchange.dto.conversion.ConversionRequest;
 import com.w4t3rcs.exchange.dto.conversion.ConversionResponse;
 import com.w4t3rcs.exchange.dto.provider.ExchangeProvider;
 import com.w4t3rcs.exchange.dto.random.RandomizedPair;
-import com.w4t3rcs.exchange.service.parser.WebParser;
+import com.w4t3rcs.exchange.service.parser.Converter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,12 +13,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
-public class ConverterService implements Converter<ConversionRequest, Mono<ConversionResponse>> {
-    private final WebParser<ConversionRequest, Mono<ConversionResponse>> webParser;
+public class ConversionHandlerService implements ConversionHandler<ConversionRequest, Mono<ConversionResponse>> {
+    private final Converter<ConversionRequest, Mono<ConversionResponse>> converter;
 
     @Autowired
-    public ConverterService(WebParser<ConversionRequest, Mono<ConversionResponse>> webParser) {
-        this.webParser = webParser;
+    public ConversionHandlerService(Converter<ConversionRequest, Mono<ConversionResponse>> converter) {
+        this.converter = converter;
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ConverterService implements Converter<ConversionRequest, Mono<Conve
     }
 
     private Mono<ConversionResponse> convert(ConversionRequest request, ExchangeProvider defaultProvider, ExchangeProvider alternate) {
-        return webParser.respond(request, defaultProvider)
+        return converter.respond(request, defaultProvider)
                 .onErrorComplete()
-                .switchIfEmpty(webParser.respond(request, alternate));
+                .switchIfEmpty(converter.respond(request, alternate));
     }
 }
