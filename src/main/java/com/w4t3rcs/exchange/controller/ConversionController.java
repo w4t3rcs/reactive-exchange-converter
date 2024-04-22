@@ -18,7 +18,7 @@ public class ConversionController {
 
     @PostMapping
     public Mono<ResponseEntity<ConversionResponse>> convertCurrency(@RequestBody ConversionRequest request) {
-        return service.convert(request)
+        return service.handle(request)
                 .map(ResponseEntity::ok)
                 .doOnError(throwable -> {
                     throw new ProviderException(throwable.getMessage());

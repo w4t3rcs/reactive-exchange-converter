@@ -17,7 +17,7 @@ public class ProviderConverter implements Converter<ConversionRequest, Mono<Conv
     private final EndpointFormatter<ExchangeProvider, String, ConversionRequest> formatter;
 
     @Override
-    public Mono<ConversionResponse> respond(ConversionRequest request, ExchangeProvider provider) {
+    public Mono<ConversionResponse> convert(ConversionRequest request, ExchangeProvider provider) {
         return webClient.get()
                 .uri(formatter.format(provider, request))
                 .retrieve()

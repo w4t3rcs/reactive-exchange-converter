@@ -23,7 +23,7 @@ public class ConversionHandlerService implements ConversionHandler<ConversionReq
 
     @Override
     @Cacheable(value = "ConverterService::convert", key = "#request.from" + "." + "#request.to")
-    public Mono<ConversionResponse> convert(ConversionRequest request) {
+    public Mono<ConversionResponse> handle(ConversionRequest request) {
         RandomizedPair<ExchangeProvider> pathPair = RandomizedPair.of(
                 ExchangeProvider.PROVIDER_1, ExchangeProvider.PROVIDER_2
         );
@@ -36,8 +36,8 @@ public class ConversionHandlerService implements ConversionHandler<ConversionReq
     }
 
     private Mono<ConversionResponse> convert(ConversionRequest request, ExchangeProvider defaultProvider, ExchangeProvider alternate) {
-        return converter.respond(request, defaultProvider)
+        return converter.convert(request, defaultProvider)
                 .onErrorComplete()
-                .switchIfEmpty(converter.respond(request, alternate));
+                .switchIfEmpty(converter.convert(request, alternate));
     }
 }

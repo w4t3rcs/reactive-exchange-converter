@@ -25,7 +25,7 @@ public class ConverterTest {
     @Test
     void parse() {
         ConversionRequest request = new ConversionRequest("USD", "EUR", 4f);
-        Mono<ConversionResponse> responseMono = parser.respond(request, ExchangeProvider.PROVIDER_1);
+        Mono<ConversionResponse> responseMono = parser.convert(request, ExchangeProvider.PROVIDER_1);
         StepVerifier.create(responseMono)
                 .expectNext(new ConversionResponse("USD", "EUR", 4f, 3.75f))
                 .verifyComplete();

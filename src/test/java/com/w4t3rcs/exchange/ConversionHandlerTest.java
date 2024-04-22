@@ -24,7 +24,7 @@ public class ConversionHandlerTest {
     @RepeatedTest(5)
     void convert() {
         ConversionRequest request = new ConversionRequest("USD", "EUR", 4f);
-        Mono<Float> responseMono = conversionHandler.convert(request)
+        Mono<Float> responseMono = conversionHandler.handle(request)
                 .map(ConversionResponse::getConverted);
         StepVerifier.create(responseMono)
                 .expectNextMatches(conversionResponse -> conversionResponse == 3.75f)
